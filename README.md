@@ -32,6 +32,7 @@ Example:
 `python3 extract_tweets.py me/Documents/Tweets/2012Tweets/ me/Documents/Tweets`
 
 The program will create an output file called: *tweetstext.json*
+
 `
 *extract_words.py*
 
