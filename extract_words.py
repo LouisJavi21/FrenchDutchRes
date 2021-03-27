@@ -36,6 +36,7 @@ def extract_words(input_file):
             bureau_total += 1
 
     # Print out the results
+    print(f'Total Tweets: {len(convert_file)}')
     print(f'Kado: {kado_total}')
     print(f'Cadeau: {cad_total}')
     print(f'Buro: {buro_total}')

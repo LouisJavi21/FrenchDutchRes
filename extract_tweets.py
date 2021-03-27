@@ -21,25 +21,29 @@ def extract_tweet_text(tweets_file, tweets_output):
     for file in os.scandir(tweets_file):
         tweet_texts = []
 
-        # To see which file it is at, for debugging purposes (corruption or bad formatting).
+        # To see which file the program is currently processing, for debugging purposes (corruption or bad formatting).
         print(file.path)
 
         # Files are in gz format.
         with gzip.open(file.path, "r") as f:
-            total_tweets = []
 
-            # Since every JSON object is on a different line, this piece of code will load every line
-            # and put it in a list.
-            for obj in f:
-                tweet_dict = json.loads(obj)
-                total_tweets.append(tweet_dict)
-
-            for tweet in total_tweets:
-                tweet_texts.append(tweet['text'])
-
+            # Since every JSON object is on a different line, the normal json.loads method will not work.
+            # Every line has to be read separately and then json.loads has to be run on it to read the tweet.
             json_file_path = f'{tweets_output}/tweetstext.json'
-            with open(json_file_path, 'w', encoding='utf-8') as tweets_json:
-                json.dump(tweet_texts, tweets_json, indent=4)
+            for obj in f:
+                tweet = json.loads(obj)
+
+                # Tweets seems to have a different format, because of this an elif statement is added.
+                # In older tweets, the lang tag is inside of the user tag. In the newer ones, it is outside of the
+                # user tag.
+                if 'lang' in tweet['user'] and tweet['user']['lang'] == 'nl':
+                    tweet_texts.append(tweet['text'])
+                elif 'lang' in tweet and tweet['lang'] == 'nl':
+                    tweet_texts.append(tweet['text'])
+
+            tweets_json = open(json_file_path, 'w')
+            json.dump(tweet_texts, tweets_json, indent=4)
+            tweets_json.close()
 
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
@@ -48,11 +52,11 @@ def extract_tweet_text(tweets_file, tweets_output):
 
 def main():
     parser = argparse.ArgumentParser(description="Extracts data from tweets and outputs it in a given spot.")
-    parser.add_argument("input", type=str, help="The path to the directory with the tweets. Only directories work with .gz format.")
-    parser.add_argument("output", type=str, help="The path to where the output should be placed. Put none if output into program folder.")
+    parser.add_argument("input_path", type=str, help="The path to the directory with the tweets. Only directories work with .gz format.")
+    parser.add_argument("output_path", type=str, help="The path to where the output should be placed. Put none if output into program folder.")
     args = parser.parse_args()
-    dir_input = f'{args.input}'
-    dir_output = args.output
+    dir_input = f'{args.input_path}'
+    dir_output = args.output_path
 
     if args.output == 'none':
         dir_output = pathlib.Path().absolute()
