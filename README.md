@@ -33,7 +33,7 @@ Example:
 
 The program will create an output file called: *tweetstext.json*
 
-`
+
 *extract_words.py*
 
 `python3 extract_words.py path_to_input_file`
