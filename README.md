@@ -52,6 +52,23 @@ Buro: 5
 Bureau: 37
 `
 
+<h2>Data</h2>
+The used *processed* data is in the *tweets* folder. It contains the extracted and processed tweets of 2012, 2019 and 2020. I have only used the data of 2012 and 2020.
+
+The data was acquired by downloading it from the karora database of the RUG univerisity using *scp*.
+Used commands are:
+
+
+For 2012
+`
+scp -r sxxxxxx@karora.let.rug.nl:/net/corpora/twitter2/Tweets/2012/12 /home/user/Documents/Tweets/2020
+`
+For 2020
+`
+scp -r sxxxxxx@karora.let.rug.nl:/net/corpora/twitter2/Tweets/2012/12 /home/user/Documents/Tweets/2020
+`
+
+
 <h2>Versions</h2>
 
 Since only builtin libraries of Python are used, the versions of those libraries match the version of Python.
