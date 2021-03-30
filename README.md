@@ -21,7 +21,7 @@ At the end the program will return the total checked tweets and the frequency of
 
 
 <h2>How to run</h2>
-The two used programs are: `extract_tweets.py` and `extract_words.py`.
+The two used programs are: extract_tweets.py and extract_words.py.
 
 `extract_tweets.py`
 
@@ -53,7 +53,7 @@ Bureau: 37
 `
 
 <h2>Data</h2>
-The used _processed_ data is in the _tweets_ folder. It contains the extracted and processed tweets of 2012, 2019 and 2020. I have only used the data of 2012 and 2020.
+The used processed data is in the tweets folder. It contains the extracted and processed tweets of 2012, 2019 and 2020. I have only used the data of 2012 and 2020.
 
 The data was acquired by downloading it from the karora database of the RUG univerisity using _scp_.
 Used commands are:
